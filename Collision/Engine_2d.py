@@ -1,4 +1,3 @@
-
 import numpy as np
 
 
@@ -41,11 +40,14 @@ class Vector2D:
 
 ##### Physical Properties
 class PhysicsObject:
-    def __init__(self, position=None, velocity=None, acceleration=None, mass=1):
+    def __init__(
+        self, position=None, velocity=None, acceleration=None, mass=1, radius=None
+    ):
         self.position = position if position is not None else Vector2D()
         self.velocity = velocity if velocity is not None else Vector2D()
         self.acceleration = acceleration if acceleration is not None else Vector2D()
         self.mass = mass
+        self.radius = radius
 
     def update(self, dt):
         self.velocity += self.acceleration * dt
@@ -79,6 +81,16 @@ def check_collision(obj1, obj2):
         and obj1.aabb.max_point.y >= obj2.aabb.min_point.y
         and obj1.aabb.min_point.y <= obj2.aabb.max_point.y
     )
+
+
+def check_collision_circle(circle1, circle2):
+    dx = circle1.position.x - circle2.position.x
+    dy = circle1.position.y - circle2.position.y
+    distance = (dx**2 + dy**2) ** 0.5
+
+    if distance <= (circle1.radius + circle2.radius):
+        return True  # Collision detected
+    return False
 
 
 def collision_response(obj1, obj2):

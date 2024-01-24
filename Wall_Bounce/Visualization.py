@@ -25,9 +25,21 @@ N = 20
 objects = []
 
 
+# for _ in range(N):
+#   position = Vector2D(np.random.uniform(-3, 3), np.random.uniform(-3, 3))
+#   velocity = Vector2D(np.random.uniform(-1, 1), np.random.uniform(-1, 1))
+##  obj = PhysicsObject(position=position, velocity=velocity, mass=1, radius=0.05)
+# objects.append(obj)
+# Define a constant speed
+constant_speed = 1.0
+
 for _ in range(N):
     position = Vector2D(np.random.uniform(-3, 3), np.random.uniform(-3, 3))
-    velocity = Vector2D(np.random.uniform(-1, 1), np.random.uniform(-1, 1))
+
+    # Create a random direction vector with a constant speed
+    angle = np.random.uniform(0, 2 * np.pi)
+    velocity = Vector2D(constant_speed * np.cos(angle), constant_speed * np.sin(angle))
+
     obj = PhysicsObject(position=position, velocity=velocity, mass=1, radius=0.05)
     objects.append(obj)
 
@@ -74,10 +86,13 @@ def update_plot(num, objects, ax, box, quadtree):
             Vector2D(obj.position.x - obj.radius, obj.position.y - obj.radius),
             Vector2D(obj.position.x + obj.radius, obj.position.y + obj.radius),
         )
+
         potential_colliders = quadtree.query(search_range, [])
+        print(potential_colliders)
 
         for collider in potential_colliders:
             if collider is not obj and check_collision_circle(obj, collider):
+                print("çarptim")
                 resolve_overlap(obj, collider)
                 collision_response(obj, collider)
 

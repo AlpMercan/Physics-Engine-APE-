@@ -6,8 +6,6 @@ An physics engine which can be used to simulate the real world conditions and th
 
 Figure1: Collision between 2 equal masses and velocities but different directions
 
-![resim](https://github.com/AlpMercan/Physics-Engine-APE-/assets/112685013/efd62872-f7e1-4089-adb7-82a41c2a3587)
+![resim](https://github.com/AlpMercan/Physics-Engine-APE-/assets/112685013/0f956896-e8fb-4181-a333-9b88e2003cba)
 
-
-
-Figure1: Bouncing masses in a Box
+Figure2: Bouncing masses in a Box
